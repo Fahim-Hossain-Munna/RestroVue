@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "i love sydul vhiya",
+      "email": "CIT",
+      "password": "12345"
+    },
+    {
+      "username": "Aspernatur laudantiu",
+      "email": "sonodivali@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 2
+    },
+    {
+      "username": "Dignissimos rerum co",
+      "email": "nifehu@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 3
+    }
+  ]
+}
