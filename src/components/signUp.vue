@@ -65,12 +65,13 @@ export default {
                     this.error.passwordError = "password field can't be null";
                 } else {
                     this.error = "";
-                  let submit = await axios.post('http://localhost:8000/api/users',{
+                  let submit = await axios.post('http://localhost:3000/users',{
                         'name' : this.name,
                         'email' : this.email,
                         'password' : this.password
                     });
-                    if(submit.status == 200){
+                    if(submit.status == 201){
+                        localStorage.setItem('user-info',JSON.stringify(submit.data))
                         alert('information submit successfull')
                         this.$router.push({ name : "Home" });
                     }else{
@@ -80,6 +81,13 @@ export default {
             }
         },
     },
+    mounted(){
+        let user = localStorage.getItem('user-info')
+
+        if(user){
+            this.$router.push({ name : "Home" }); 
+        }
+    }
 };
 </script>
 

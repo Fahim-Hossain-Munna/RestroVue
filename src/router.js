@@ -1,6 +1,7 @@
 import { createWebHistory,createRouter } from "vue-router";
 import Home from "./components/Home.vue";
 import signUp from "./components/signUp.vue";
+import nopage from "./components/404.vue";
 
 const routes = [
     {
@@ -12,6 +13,11 @@ const routes = [
         name: "Home",
         path:'/home',
         component: Home
+    },
+    {
+        name: "404",
+        path:'/:PathMatch(.*)*',
+        component: nopage
     },
 ];
 
