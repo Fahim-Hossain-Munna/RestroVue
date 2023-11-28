@@ -58,6 +58,7 @@ export default {
                   let submit = await axios.get(
                     `http://localhost:3000/users?email=${this.email}&password=${this.password}`
                   )
+                  console.log(submit);
                     if(submit.status == 200 && submit.data.length > 0){
                         localStorage.setItem('user-info',JSON.stringify(submit.data[0]))
                         alert('you are login successfull')

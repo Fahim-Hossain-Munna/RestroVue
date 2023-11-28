@@ -1,22 +1,18 @@
 <template >
     <div>
         <Header/>
-        <!-- <button v-on:click="logout" >Logout</button> -->
+        <h1>im show</h1>
     </div>
 </template>
 <script>
 import Header from './Header.vue'
 export default {
-    name: "Home",
+    name:"ShowList",
     components:{
         Header,
     }
 }
 </script>
-
-
 <style scoped>
     
-
-
 </style>

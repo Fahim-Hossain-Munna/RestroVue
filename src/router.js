@@ -3,6 +3,7 @@ import Home from "./components/Home.vue";
 import signUp from "./components/signUp.vue";
 import nopage from "./components/404.vue";
 import Login from "./components/Login.vue";
+import ShowList from "./components/ShowList.vue";
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         name: "Login",
         path:'/login',
         component: Login
+    },
+    {
+        name: "ShowList",
+        path:'/list',
+        component: ShowList
     },
 ];
 
