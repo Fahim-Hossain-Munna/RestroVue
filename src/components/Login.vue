@@ -1,18 +1,13 @@
-<template>
-<div>
-    <div class="main">
+<template >
+    <div>
+        <div class="main">
         <div class="left">
             <h2>Welcome To <span>Chatt.</span></h2>
-            <h3>Sign Up</h3>
+            <h3>Sign In</h3>
             <span class="login-page">
-                already have an account ? <router-link to="/login">Sign in</router-link>
+                don't have an account ? <router-link to="/">Sign up</router-link>
             </span>
             <div class="form">
-                <label>First Name</label>
-                <input type="text" placeholder="Name here" v-model="name" />
-                <div class="error" v-if="name == '' ">
-                    <p>{{ error.nameError }}</p>
-                </div>
                 <label>Email</label>
                 <input type="email" placeholder="Email here" v-model="email" />
                 <div class="error" v-if="email == '' ">
@@ -23,62 +18,52 @@
                 <div class="error" v-if="password == '' ">
                     <p>{{ error.passwordError }}</p>
                 </div>
-                <button v-on:click="signUp"><span>Sign Up</span></button>
+                <button v-on:click="login"><span>Login</span></button>
             </div>
         </div>
         <div class="right">
-            <img src="../assets/images/signup/signup.png" />
+            <img src="../assets/images/login/login.jpg" />
             <div class="overlay"></div>
         </div>
     </div>
-</div>
+    </div>
 </template>
-
 <script>
-import axios from "axios";
-import HomeVue from './Home.vue';
+import axios from 'axios';
 export default {
-    name: "signUp",
+    name:"Login",
     data() {
         return {
-            name: "",
             email: "",
             password: "",
             error: {
-                nameError: "",
                 emailError: "",
                 passwordError: "",
             },
         };
     },
     methods: {
-       async signUp() {
+       async login() {
 
-            if (this.name === "" && this.email === "" && this.password === "") {
-                this.error.nameError = "name field can't be null";
+            if (this.email === "" && this.password === "") {
                 this.error.emailError = "email field can't be null";
                 this.error.passwordError = "password field can't be null";
             } else {
-                if (this.name === "") {
-                    this.error.nameError = "name field can't be null";
-
-                } else if (this.email === "") {
+                if (this.email === "") {
                     this.error.emailError = "email field can't be null";
                 } else if (this.password === "") {
                     this.error.passwordError = "password field can't be null";
                 } else {
-                    this.error = "";
-                  let submit = await axios.post('http://localhost:3000/users',{
-                        'name' : this.name,
-                        'email' : this.email,
-                        'password' : this.password
-                    });
-                    if(submit.status == 201){
-                        localStorage.setItem('user-info',JSON.stringify(submit.data))
-                        alert('information submit successfull')
+                this.error = "";
+                  let submit = await axios.get(
+                    `http://localhost:3000/users?email=${this.email}&password=${this.password}`
+                  )
+                    if(submit.status == 200 && submit.data.length > 0){
+                        localStorage.setItem('user-info',JSON.stringify(submit.data[0]))
+                        alert('you are login successfull')
                         this.$router.push({ name : "Home" });
                     }else{
-                        alert('information submit unsuccessfull')
+                        alert('you are login unsuccessfull')
                     }
                 }
             }
@@ -90,12 +75,14 @@ export default {
         if(user){
             this.$router.push({ name : "Home" }); 
         }
+
     }
-};
+}
 </script>
 
+
 <style scoped>
-.main {
+  .main {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -109,7 +96,6 @@ export default {
     margin-left: 100px;
 }
 
-
 .left h2 {
     color: var(--primary-100, #32375c);
     font-family: Inter;
@@ -122,6 +108,7 @@ export default {
 .left h2 span {
     font-size: 45px;
 }
+
 .left .form {
     margin-top: 20px;
 }
@@ -225,5 +212,5 @@ export default {
             rgba(217, 217, 217, 1) 0%,
             rgba(50, 55, 92, 1) 73%);
     opacity: 0.3;
-}
+}  
 </style>
